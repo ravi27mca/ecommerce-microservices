@@ -1,0 +1,58 @@
+user-service/
+├── src/
+│   ├── main/
+│   │   ├── java/
+│   │   │   └── com/example/userservice/
+│   │   │       │
+│   │   │       ├── config/                 # 1. Configuration Layer
+│   │   │       │   ├── DatabaseConfig.java
+│   │   │       │   ├── FeignConfig.java
+│   │   │       │   └── SecurityConfig.java
+│   │   │       │
+│   │   │       ├── controller/             # 2. API / Entry Point Layer
+│   │   │       │   └── UserController.java
+│   │   │       │
+│   │   │       ├── dto/                    # 3. Data Transfer Objects
+│   │   │       │   ├── request/
+│   │   │       │   │   ├── UserRegisterRequest.java
+│   │   │       │   │   └── UserUpdateRequest.java
+│   │   │       │   └── response/
+│   │   │       │       ├── ApiResponse.java
+│   │   │       │       └── UserResponse.java
+│   │   │       │
+│   │   │       ├── entity/                 # 4. Database Models (JPA)
+│   │   │       │   └── User.java
+│   │   │       │
+│   │   │       ├── repository/             # 5. Data Access Object (DAO)
+│   │   │       │   └── UserRepository.java
+│   │   │       │
+│   │   │       ├── service/                # 6. Business Logic Layer
+│   │   │       │   ├── UserService.java        (Interface)
+│   │   │       │   ├── UserServiceImpl.java    (Implementation)
+│   │   │       │   └── client/                 # Inter-service Communication
+│   │   │       │       └── OrderFeignClient.java
+│   │   │       │
+│   │   │       ├── exception/              # 7. Error Handling
+│   │   │       │   ├── GlobalExceptionHandler.java
+│   │   │       │   └── ResourceNotFoundException.java
+│   │   │       │
+│   │   │       └── util/                   # 8. Core Utilities & Helpers
+│   │   │           ├── AppConstants.java
+│   │   │           ├── DateUtils.java
+│   │   │           └── UserMappingUtils.java   (DTO to Entity conversion)
+│   │   │
+│   │   └── resources/                      # 9. Configurations & Resources
+│   │       ├── application.yml                 (Active Profiles, Port, App Name)
+│   │       ├── application-dev.yml             (Development Database Credentials)
+│   │       ├── application-prod.yml            (Production Credentials)
+│   │       └── db/migration/                   # Database version control
+│   │           └── V1__create_users_table.sql
+│   │
+│   └── test/                               # 10. Unit & Integration Testing
+│       └── java/com/example/userservice/
+│           ├── controller/UserControllerTest.java
+│           └── service/UserServiceTest.java
+│
+├── Dockerfile                              # Containerization
+├── pom.xml / build.gradle                  # Build and Dependency Tool
+└── README.md                               # Project documentation
