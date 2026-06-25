@@ -1,0 +1,41 @@
+spring:
+  application:
+    name: api-gateway-service
+
+  main:
+    web-application-type: REACTIVE
+
+  config:
+    import: configserver:http://localhost:9296
+
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        - id: PRODUCT-SERVICE
+          #uri: http://localhost:8060
+          uri: lb://PRODUCT-SERVICE
+          predicates:
+            - Path=/product-service/v1/api/**
+          filters:
+            - name: CircuitBreaker
+              args:
+                name: PRODUCT-SERVICE
+                fallbackUri: forward:/fallback/products
+
+        - id: PAYMENT-SERVICE
+          uri: lb://PAYMENT-SERVICE
+          predicates:
+            - Path=/payment-service/v1/api/**
+
+server:
+  port: 8073
+  servlet:
+    context-path: /api-gateway
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
